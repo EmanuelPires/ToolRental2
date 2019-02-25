@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "password",
+    "password": "password123",
     "database": "ToolRental",
     "host": "localhost",
     "dialect": "mysql"
