@@ -54,13 +54,15 @@ module.exports = function(app) {
   app.get("/order/:id", function(req, res) {
     db.Order.findAll({
       where: {
-        id: req.params.id
-      }
+        FK_CustomerID: req.params.id
+      },
+      include: [db.Product]
     }).then(function(dbResponse) {
-      console.log("Customers orders; " + dbResponse);
-      res.render("myOrders", {
-        orders: dbResponse
-      });
+      console.log("Customers orders; " + dbResponse[0]);
+      res.json(dbResponse);
+      // res.render("myOrders", {
+      //   orders: dbResponse[0]
+      // });
     });
   });
 };

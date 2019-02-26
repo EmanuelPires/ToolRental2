@@ -7,7 +7,6 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
         autoIncrement: true
       },
-      FK_ProductID: DataTypes.INTEGER,
       OrderDate: DataTypes.DATE,
       PickUpDate: DataTypes.DATE,
       OrderCost: DataTypes.DECIMAL,
@@ -19,5 +18,25 @@ module.exports = function(sequelize, DataTypes) {
       timestamps: false
     }
   );
+  Order.associate = function(models) {
+    // We're saying that a Post should belong to an Author
+    // A Post can't be created without an Author due to the foreign key constraint
+    Order.belongsTo(models.Customer, {
+      foreignKey: {
+        allowNull: false,
+        name: 'FK_CustomerID'
+      }
+    });
+  };
+  Order.associate = function(models) {
+    // We're saying that a Post should belong to an Author
+    // A Post can't be created without an Author due to the foreign key constraint
+    Order.belongsTo(models.Product, {
+      foreignKey: {
+        allowNull: false,
+        name: 'FK_ProductID'
+      }
+    });
+  };
   return Order;
 };
