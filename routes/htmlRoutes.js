@@ -3,13 +3,36 @@ var db = require("../models");
 console.log(db);
 
 module.exports = function(app) {
+  app.get("/login/:username/:password", function(req, res) {
+    db.CustomerCredentials.findAll({
+      where: {
+        UserName: req.params.username,
+        Password: req.params.password
+      }
+    }).then(function(dbResponse) {
+      //console.log("res", dbResponse);
+      res.json(dbResponse[0]);
+    });
+  });
   //login section
 
-  app.get("/login", function(req, res) {
-    db.CustomerCredentials.findAll({}).then(function(dbResponse) {
-      console.log("res", dbResponse);
-      res.render("index", {
-        customer: dbResponse[0]
+  app.get("/", function(req, res) {
+    db.Product.findAll({}).then(function(dbProduct) {
+      res.render("index", {});
+    });
+  });
+
+  app.get("/login/:id", function(req, res) {
+    console.log(req.params.id);
+    db.Customer.findOne({
+      where: {
+        CustomerID: req.params.id
+      }
+    }).then(function(dbcustomer) {
+      //console.log(dbcustomer);
+      //res.json(dbcustomer);
+      res.render("index_login", {
+        customer: dbcustomer
       });
     });
   });
