@@ -1,3 +1,14 @@
+<p>hello</p>
+
+{{!-- <p>{{product.dataValues.ProductID}}</p>
+<p>{{product.dataValues.Customer.dataValues.CustomerID}}</p> --}}
+
+<ul>
+    {{#each product}}
+    {{>products}}
+    {{/each}}
+</ul>
+
 {{!-- <p>hello</p>
 <p>{{profile.dataValues.Name}}</p> --}}
 <div class="highlight-blue shadow p-10">
@@ -347,3 +358,5 @@
         initDialog();
     });
 </script> --}}
+
+<script type="text/javascript" src="/js/indexJavascript.js"></script>

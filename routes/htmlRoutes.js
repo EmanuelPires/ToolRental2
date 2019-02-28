@@ -62,7 +62,8 @@ module.exports = function(app) {
     db.Product.findAll({
       where: {
         SupplierID: req.params.id
-      }
+      },
+      include: [db.Customer]
     }).then(function(dbResponse) {
       console.log("customer products: " + dbResponse);
       // res.json(dbResponse);
@@ -86,6 +87,19 @@ module.exports = function(app) {
       // res.render("myOrders", {
       //   orders: dbResponse[0]
       // });
+    });
+  });
+
+  app.get("/search/:productname", function(req, res) {
+    db.Product.findAll({
+      where: { Product_Name: req.params.productname },
+      include: [db.Customer]
+    }).then(function(dbproducts) {
+      // console.log(dbproducts[0].dataValues);
+      // res.json(dbproducts);
+      res.render("index_products", {
+        product: dbproducts
+      });
     });
   });
 };
