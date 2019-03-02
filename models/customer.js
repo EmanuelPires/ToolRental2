@@ -20,5 +20,23 @@ module.exports = function(sequelize, DataTypes) {
       timestamps: false
     }
   );
+
+  Customer.associate = function(models) {
+    // Associating Author with Posts
+    // When an Author is deleted, also delete any associated Posts
+    Customer.hasMany(models.Order, {
+      foreignKey: {
+        allowNull: false,
+        name: "FK_CustomerID"
+      }
+    });
+
+    Customer.hasMany(models.Product, {
+      foreignKey: {
+        allowNull: false,
+        name: "SupplierID"
+      }
+    });
+  };
   return Customer;
 };
