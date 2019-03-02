@@ -160,6 +160,8 @@ Search For Product While Logged in.
 $("#loggedInSearchBtn").on("click", function() {
   var toolSearch = document.getElementById("toolSearch").value;
   // var location = document.getElementById("locationSearch").value;
+  var id = $(this).data("id");
+  console.log(id);
   var url = "/search/" + id + "/" + toolSearch;
 
   $.ajax({
