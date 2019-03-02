@@ -29,8 +29,8 @@ module.exports = function(app) {
         CustomerID: req.params.id
       }
     }).then(function(dbcustomer) {
-      //console.log(dbcustomer);
-      //res.json(dbcustomer);
+      // console.log(dbcustomer);
+      // res.json(dbcustomer);
       res.render("index_login", {
         customer: dbcustomer
       });
@@ -39,24 +39,45 @@ module.exports = function(app) {
 
   // Where you can see your profile info
 
-  app.get("/profile/:id", function(req, res) {
-    console.log("Testing" + db.Customer);
-    db.Customer.findOne({
+  app.get("/myaccount/:id", function(req, res) {
+    db.Customer.findAll({
       where: {
         CustomerID: req.params.id
-      }
+      },
+      include: [
+        {
+          model: db.Order,
+          required: false
+        }
+      ],
+      include: [
+        {
+          model: db.Product,
+          required: false
+        }
+      ]
     }).then(function(dbResponse) {
       //res.json(dbResponse);
 
       profile = dbResponse;
-      console.log(profile.dataValues.Name);
-      res.render("profile", {
-        profile: dbResponse
+      // console.log(profile);
+
+      // console.log(profile[0].dataValues.Products[0].dataValues.Product_Name);
+      //console.log(profile[0].profile.dataValues..Products.dataValues[0].Product_Name);
+
+      res.render("myOrders", {
+        profile: dbResponse[0],
+        Product: profile[0].dataValues.Products[0],
+        Order: profile[0].dataValues.Order
       });
     });
   });
 
-  //Where a renter sees the products they're renting
+  /*
+  
+  WHERE THE RENTER SEES WHAT THEY'RE OFFERING
+
+  */
 
   app.get("/product/:id", function(req, res) {
     db.Product.findAll({
@@ -73,7 +94,11 @@ module.exports = function(app) {
     });
   });
 
-  //Where renter sees what they've rented
+  /*
+  
+  Where renter sees what they've rented
+
+  */
 
   app.get("/order/:id", function(req, res) {
     db.Order.findAll({
@@ -97,7 +122,21 @@ module.exports = function(app) {
     }).then(function(dbproducts) {
       // console.log(dbproducts[0].dataValues);
       // res.json(dbproducts);
+      console.log(dbproducts);
       res.render("index_products", {
+        product: dbproducts
+      });
+    });
+  });
+
+  app.get("/search/:id/:productname", function(req, res) {
+    db.Product.findAll({
+      where: { Product_Name: req.params.productname },
+      include: [db.Customer]
+    }).then(function(dbproducts) {
+      // console.log(dbproducts[0].dataValues);
+      // res.json(dbproducts);
+      res.render("index_login_products", {
         product: dbproducts
       });
     });

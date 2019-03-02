@@ -1,0 +1,22 @@
+{{!-- <li>
+    <p>Product Name: <Strong>{{dataValues.Product_Name}}</Strong></p>
+</li>
+<li>
+    <p>Offered By: <strong>{{dataValues.Customer.dataValues.Name}}</strong></p>
+
+
+    <button class="orderBtn" data-id="{{dataValues.ProductID}}">order</button>
+</li> --}}
+
+<div class="col-3">
+    <div class="card-fluid shadow p-3">
+        <img src="{{dataValues.Image}}" width="400px" height="250px" alt="">
+        <h3 class="name">{{dataValues.Product_Name}}</h3>
+        <hr />
+        <ul>
+            <li>Price: {{dataValues.UnitPrice}}</li>
+            <li>Units Available: {{dataValues.UnitsInStock}}</li>
+        </ul>
+
+    </div>
+</div>

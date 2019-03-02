@@ -1,10 +1,18 @@
 console.log("hello from the Javascript file");
 
-var id;
+var custid;
 var url_login;
+/*
+
+
+
 
 //Loggin In from Modal
 
+
+
+
+*/
 $("#login").on("click", function() {
   var userName = document.getElementById("modalLRInput10").value;
   var password = document.getElementById("modalLRInput11").value;
@@ -14,27 +22,59 @@ $("#login").on("click", function() {
   var url = "/login/" + userName + "/" + password;
   console.log(url);
 
+  custid = login(url);
+
+  // $.ajax({
+  //   method: "GET",
+  //   url: url
+  // }).then(function(data) {
+  //   var id = data.FK_CustomerID;
+  //   console.log(id);
+  //   debugger;
+  //   url_login = "/login/" + id;
+  //   window.location.href = "/login/" + id;
+
+  //   // $.ajax({
+  //   //   method: "GET",
+  //   //   url: url_login
+  //   // }).then(function(res) {
+  //   //   window.location.href = "/login/" + id;
+  //   //   return id;
+  //   // });
+  //   custid = id;
+  //   console.log(id);
+  //   return id;
+  // });
+  console.log(custid);
+  debugger;
+});
+
+function login(url) {
   $.ajax({
     method: "GET",
     url: url
   }).then(function(data) {
-    console.log(data.FK_CustomerID);
-    id = data.FK_CustomerID;
+    var id = data.FK_CustomerID;
     console.log(id);
-
+    debugger;
     url_login = "/login/" + id;
-    console.log(url_login);
+    window.location.href = "/login/" + id;
     $.ajax({
       method: "GET",
       url: url_login
     }).then(function(res) {
-      console.log("response" + res.Name);
       window.location.href = "/login/" + id;
     });
   });
-});
+}
 
-// Registering a new customer/renter from Modal.
+/*
+
+
+Registering a new customer/renter from Modal.
+
+
+*/
 
 $("#newUserSubmit").on("click", function() {
   var newUserName = document.getElementById("modalLRInput12").value;
@@ -69,6 +109,7 @@ $("#newUserSubmit").on("click", function() {
         //model hide
         url_login = "/login/" + id;
         console.log(url_login);
+        window.location.href = "/login/" + id;
         $.ajax({
           method: "GET",
           url: url_login
@@ -84,8 +125,14 @@ $("#newUserSubmit").on("click", function() {
     // });
   }
 });
+/*
+
+
 
 //Searching for a tool!
+
+
+*/
 
 $("#searchBtn").on("click", function() {
   var toolSearch = document.getElementById("toolSearch").value;
@@ -104,7 +151,43 @@ $("#searchBtn").on("click", function() {
   });
 });
 
+/*
+
+Search For Product While Logged in.
+
+*/
+
+$("#loggedInSearchBtn").on("click", function() {
+  var toolSearch = document.getElementById("toolSearch").value;
+  // var location = document.getElementById("locationSearch").value;
+  var url = "/search/" + id + "/" + toolSearch;
+
+  $.ajax({
+    method: "GET",
+    url: url
+  }).then(function(res) {
+    console.log(res);
+    window.location.href = url;
+  });
+});
+
+/* 
+
+ADD PRODUCT SECTION
+
+NOT WORKING
+
+*/
+
 $("#addProductButton").on("click", function() {});
+
+/*
+
+SUBMIT PRODUCT SECTION
+
+NOT WORKING
+
+*/
 
 $("#submitProduct").on("click", function() {
   var productName = document.getElementById("productName").value;
@@ -137,11 +220,17 @@ $("#submitProduct").on("click", function() {
   });
 });
 
-document
-  .getElementsByClassName("orderBtn")
-  .addEventListener("click", function() {
-    console.log("hello");
-  });
+/*
+
+ORDER BUTTON
+
+NOT WORKING
+
+*/
+
+$("#orderBtn").on("click", function() {
+  console.log("hello");
+});
 
 $(".orderBtn").on("click", function() {
   console.log("hello");
@@ -149,4 +238,22 @@ $(".orderBtn").on("click", function() {
   var productid = $(this).data("id");
 
   console.log(productid);
+});
+
+/* 
+
+
+
+
+My Account Section
+
+
+
+
+*/
+
+$("#myAccount").on("click", function() {
+  var id = $(this).data("id");
+  console.log(id);
+  window.location.href = "/myaccount/" + id;
 });

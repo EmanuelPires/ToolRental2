@@ -24,7 +24,7 @@ module.exports = function(sequelize, DataTypes) {
     Order.belongsTo(models.Customer, {
       foreignKey: {
         allowNull: false,
-        name: 'FK_CustomerID'
+        name: "FK_CustomerID"
       }
     });
   };
@@ -34,7 +34,7 @@ module.exports = function(sequelize, DataTypes) {
     Order.belongsTo(models.Product, {
       foreignKey: {
         allowNull: false,
-        name: 'FK_ProductID'
+        name: "FK_ProductID"
       }
     });
   };

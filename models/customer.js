@@ -27,7 +27,14 @@ module.exports = function(sequelize, DataTypes) {
     Customer.hasMany(models.Order, {
       foreignKey: {
         allowNull: false,
-        name: 'FK_CustomerID'
+        name: "FK_CustomerID"
+      }
+    });
+
+    Customer.hasMany(models.Product, {
+      foreignKey: {
+        allowNull: false,
+        name: "SupplierID"
       }
     });
   };
