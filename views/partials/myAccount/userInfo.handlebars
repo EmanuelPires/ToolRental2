@@ -1,0 +1,33 @@
+<div class="card-body ">
+    <div class="tab-content text-center">
+        <div class="tab-pane active" id="profile">
+            <div class="row">
+                <div class="col-2">
+                    <p> Name</p>
+                </div>
+                <div class="col-3">{{profile.dataValues.Name}}</div>
+
+            </div>
+            {{!-- <hr> --}}
+            {{!-- <div class="row">
+                <div class="col-2">
+                    <p> UserName</p>
+                </div>
+                <div class="col-3">
+                    {{profile.dataValues.UserName}}
+                </div>
+
+
+            </div> --}}
+            <hr>
+            <div class="row">
+                <div class="col-2">
+                    <p>Address</p>
+                </div>
+                <div class="col-3">
+                    {{profile.dataValues.Street}} {{profile.dataValues.City}} {{profile.dataValues.State}}
+                    {{profile.dataValues.Country}} {{profile.dataValues.Zipcode}}
+                </div>
+
+            </div>
+        </div>

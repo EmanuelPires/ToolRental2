@@ -46,7 +46,6 @@ $("#login").on("click", function() {
   //   return id;
   // });
   console.log(custid);
-  debugger;
 });
 
 function login(url) {
@@ -56,7 +55,7 @@ function login(url) {
   }).then(function(data) {
     var id = data.FK_CustomerID;
     console.log(id);
-    debugger;
+
     url_login = "/login/" + id;
     window.location.href = "/login/" + id;
     $.ajax({
@@ -99,6 +98,7 @@ $("#newUserSubmit").on("click", function() {
       data: POST
     }).done(function() {
       var url = "/login/" + newUserName + "/" + password1;
+      console.log(url);
       $.ajax({
         method: "GET",
         url: url
@@ -157,7 +157,7 @@ Search For Product While Logged in.
 
 */
 
-$("#loggedInSearchBtn").on("click", function() {
+$("#searchBtn").on("click", function() {
   var toolSearch = document.getElementById("toolSearch").value;
   // var location = document.getElementById("locationSearch").value;
   var id = $(this).data("id");
@@ -222,26 +222,6 @@ $("#submitProduct").on("click", function() {
   });
 });
 
-/*
-
-ORDER BUTTON
-
-NOT WORKING
-
-*/
-
-$("#orderBtn").on("click", function() {
-  console.log("hello");
-});
-
-$(".orderBtn").on("click", function() {
-  console.log("hello");
-
-  var productid = $(this).data("id");
-
-  console.log(productid);
-});
-
 /* 
 
 
@@ -258,4 +238,143 @@ $("#myAccount").on("click", function() {
   var id = $(this).data("id");
   console.log(id);
   window.location.href = "/myaccount/" + id;
+});
+
+/*
+
+Home Button From Profile Page
+
+*/
+
+$("#homeBtn").on("click", function() {
+  var id = document.getElementById("homeBtn").getAttribute("data-id");
+  // var id = $(this).data("id");
+  console.log(id);
+
+  window.location.href = "/login/" + id;
+});
+
+/*
+
+USER UPDATING PROFILE
+
+*/
+
+$("#saveBTN").on("click", function() {
+  var firstName = document.getElementById("firstName").value;
+  var lastName = document.getElementById("lastName").value;
+  var fullName = firstName + lastName;
+  var phone = document.getElementById("phone").value;
+  var street = document.getElementById("street").value;
+  var city = document.getElementById("city").value;
+  var state = document.getElementById("state").value;
+  var country = document.getElementById("country").value;
+  var zipcode = document.getElementById("zipcode").value;
+  var id = $(this).data("id");
+
+  var updatedUser =
+    "First Name: " +
+    firstName +
+    "Last Name: " +
+    lastName +
+    "Full Name: " +
+    fullName +
+    "Phone: " +
+    phone +
+    "Address: " +
+    street +
+    city +
+    state +
+    country +
+    zipcode +
+    console.log(updatedUser);
+
+  var UPDATE = {
+    Name: fullName,
+    Phone: phone,
+    Street: street,
+    City: city,
+    State: state,
+    Country: country,
+    Zipcode: zipcode
+  };
+  console.log(UPDATE);
+  $.ajax({
+    method: "PUT",
+    url: "/api/customer/" + id,
+    data: UPDATE
+  }).done(function() {
+    debugger;
+    console.log(id);
+    var url = "/myaccount/" + id;
+    debugger;
+    window.location.href = url;
+
+    // $.ajax({
+    //   method: "GET",
+    //   url: url
+    // }).then(function(data) {
+    //   console.log(data.CustomerID);
+    //   // id = data.CustomerID;
+    //   console.log(id);
+    //   //model hide
+    //   window.location.href = "/myaccount/" + id;
+    // });
+  });
+  // $.post("/api/register", POST, function(res) {
+  //   console.log(res);
+  //   window.location.href = "/login/" + res.dataValues.CustomerID;
+  // });
+});
+
+/*
+
+Order Button Section
+
+*/
+
+$(".orderBtn").on("click", function() {
+  console.log("hello");
+
+  var productid = $(this).data("id");
+  var customerid = $(this).data("user");
+
+  var OrderCost = $(this).data("price");
+  var UnitsOnOrder = parseInt($(this).data("order")) + 1;
+  var UnitsInStock = parseInt($(this).data("stock")) - 1;
+  var OrderQuantity = 1;
+  var PickUp = 1;
+  console.log(OrderCost);
+  var Order = {
+    FK_CustomerID: customerid,
+    FK_ProductID: productid,
+    OrderCost: OrderCost * OrderQuantity,
+    OrderQuantity: OrderQuantity,
+    PickUp: PickUp
+  };
+  var Product = {
+    ProductID: productid,
+    UnitsOnOrder: UnitsOnOrder,
+    UnitsInStock: UnitsInStock
+  };
+
+  console.log(Order);
+  console.log(Product);
+  debugger;
+
+  $.ajax({
+    method: "POST",
+    url: "/api/addorder/",
+    data: Order
+  }).done(function(data) {
+    alert("Thank you for the order");
+    debugger;
+    $.ajax({
+      method: "PUT",
+      url: "/api/product/",
+      data: Product
+    }).done(function(data) {
+      window.location.href = "/myaccount/" + customerid;
+    });
+  });
 });

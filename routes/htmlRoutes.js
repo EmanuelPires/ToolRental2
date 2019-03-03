@@ -48,9 +48,7 @@ module.exports = function(app) {
         {
           model: db.Order,
           required: false
-        }
-      ],
-      include: [
+        },
         {
           model: db.Product,
           required: false
@@ -61,14 +59,18 @@ module.exports = function(app) {
 
       profile = dbResponse;
       // console.log(profile);
+      //console.log(dataValues.CustomerID);
 
       // console.log(profile[0].dataValues.Products[0].dataValues.Product_Name);
       //console.log(profile[0].profile.dataValues..Products.dataValues[0].Product_Name);
-
-      res.render("myOrders", {
+      // res.json(dbResponse[0].dataValues.Name);
+      console.log(profile[0].dataValues.CustomerID);
+      // console.log(profile[0].dataValues.Orders[0].dataValues.OrderID);
+      console.log(dbResponse[0].dataValues);
+      res.render("index_myaccount", {
         profile: dbResponse[0],
-        Product: profile[0].dataValues.Products[0],
-        Order: profile[0].dataValues.Order
+        Product: profile[0].dataValues.Products,
+        Order: profile[0].dataValues.Orders
       });
     });
   });

@@ -14,9 +14,14 @@
         <h3 class="name">{{dataValues.Product_Name}}</h3>
         <hr />
         <ul>
-            <li>Price: {{dataValues.UnitPrice}}</li>
+
+            <li>UnitPrice: {{dataValues.UnitPrice}}</li>
             <li>Units Available: {{dataValues.UnitsInStock}}</li>
+            <li>Renter UserName: {{dataValues.Customer.dataValues.Name}}</li>
         </ul>
+        <button data-id={{dataValues.ProductID}} data-price={{dataValues.UnitPrice}}
+            data-user={{dataValues.Customer.dataValues.CustomerID}} data-stock={{dataValues.UnitsInStock}}
+            data-order={{dataValues.UnitsOnOrder}} class="orderBtn">ORDER</button>
 
     </div>
 </div>

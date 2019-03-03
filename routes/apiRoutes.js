@@ -35,20 +35,52 @@ module.exports = function(app) {
       res.json(dbResponse);
     });
   });
-  app.post("/addorder/:id/:productid", function(req, res) {
+  app.post("/api/addorder/", function(req, res) {
     console.log(req.body);
     db.Order.create({
-      FK_CustomerID: req.params.id,
-      FK_ProductID: req.params.productid,
-      OrderDate: req.body.orderdate,
-      PickUpDate: req.body.pickupdate,
-      OrderQuantity: req.body.orderquantity,
-      PickUp: req.body.pickup,
-      OrderCost: req.body.ordercost
+      FK_CustomerID: req.body.FK_CustomerID,
+      FK_ProductID: req.body.FK_ProductID,
+      OrderQuantity: req.body.OrderQuantity,
+      PickUp: req.body.PickUp,
+      OrderCost: req.body.OrderCost
     }).then(function(dbResponse) {
-      res.json(dbResponse);
+      res.render("Index_myaccount");
     });
   });
+
+  //Updating the customer Table
+
+  app.put("/api/customer/:id", function(req, res) {
+    console.log(req.body);
+    db.Customer.update(req.body, {
+      where: {
+        CustomerID: req.params.id
+      }
+    }).then(function(dbResponse) {
+      //res.json(dbResponse);
+      res.render("index_myaccount");
+    });
+  });
+
+  // Updating the Product Table
+  app.put("/api/product/", function(req, res) {
+    console.log(req.body);
+    db.Product.update(
+      {
+        UnitsInStock: req.body.UnitsInStock,
+        UnitsOnOrder: req.body.UnitsOnOrder
+      },
+      {
+        where: {
+          ProductID: req.body.ProductID
+        }
+      }
+    ).then(function(dbResponse) {
+      //res.json(dbResponse);
+      res.render("index_myaccount");
+    });
+  });
+
   // app.get("/search/:productname", function(req, res) {
   //   db.Product.findAll({
   //     where: { Product_Name: req.params.productname },

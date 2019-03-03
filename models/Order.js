@@ -7,8 +7,14 @@ module.exports = function(sequelize, DataTypes) {
         primaryKey: true,
         autoIncrement: true
       },
-      OrderDate: DataTypes.DATE,
-      PickUpDate: DataTypes.DATE,
+      OrderDate: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+      },
+      PickUpDate: {
+        type: DataTypes.DATE,
+        defaultValue: DataTypes.NOW
+      },
       OrderCost: DataTypes.DECIMAL,
       OrderQuantity: DataTypes.INTEGER,
       PickUp: DataTypes.INTEGER
