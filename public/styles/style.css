@@ -259,3 +259,11 @@ img {
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
+#myAccount {
+  float: right;
+  background-color: #53c987;
+  border-color: #53c987;
+}
+ul {
+  list-style-type: none;
+}
