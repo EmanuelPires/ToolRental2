@@ -191,34 +191,34 @@ NOT WORKING
 
 */
 
-$("#submitProduct").on("click", function() {
+$("#submitProduct").on("click", function(event) {
+  event.preventDefault();
+  var id = $(this).data("id");
   var productName = document.getElementById("productName").value;
   var unitPrice = document.getElementById("unitPrice").value;
-  var unitsInStock = document.getElementById("unitsInStock").value;
-  var avaliablity = document.getElementById("radioVal").checked;
+  var unitsInStock = document.getElementById("unitStock").value;
+
+  var imageURL = document.getElementById("imageURL").value;
 
   var postProduct = {
     ProductName: productName,
     UnitPrice: unitPrice,
     UnitsInStock: unitsInStock,
-    Avaliablity: avaliablity,
-    image: image
+    image: imageURL
   };
+
+  console.log(id);
+  console.log(postProduct);
+  debugger;
 
   $.ajax({
     method: "POST",
-    url: "/addproduct/" + id + "/" + image,
+    url: "/addproduct/" + id,
     data: postProduct
   }).done(function(data) {
-    window.location.href = "/product/" + id;
-
-    // $.ajax({
-    //   method: "GET",
-    //   url: producturl
-    // }).then(function(pdres) {
-    //   console.log(pdres);
-    //   window.location.href = "/product/" + id;
-    // });
+    console.log(id);
+    debugger;
+    window.location.href = "/myaccount/" + id;
   });
 });
 

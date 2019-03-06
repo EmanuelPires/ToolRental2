@@ -21,18 +21,19 @@ module.exports = function(app) {
     });
   });
 
-  app.post("/AddProduct/:id/:image", function(req, res) {
+  app.post("/addproduct/:id/", function(req, res) {
     console.log(req.body);
     db.Product.create({
       Product_Name: req.body.ProductName,
       SupplierID: req.params.id,
       UnitPrice: req.body.UnitPrice,
-      unitsInStock: req.body.UnitsInStock,
-      unitsOnOrder: 0,
-      Availability: req.body.Availability,
-      Image: req.params.image
+      UnitsInStock: req.body.UnitsInStock,
+      UnitsOnOrder: 0,
+      Availability: 1,
+      Image: req.body.image,
+      FK_CategoryID: 1
     }).then(function(dbResponse) {
-      res.json(dbResponse);
+      res.render("index_myaccount");
     });
   });
   app.post("/api/addorder/", function(req, res) {
