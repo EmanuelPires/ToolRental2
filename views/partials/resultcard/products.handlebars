@@ -1,16 +1,6 @@
-{{!-- <li>
-    <p>Product Name: <Strong>{{dataValues.Product_Name}}</Strong></p>
-</li>
-<li>
-    <p>Offered By: <strong>{{dataValues.Customer.dataValues.Name}}</strong></p>
-
-
-    <button class="orderBtn" data-id="{{dataValues.ProductID}}">order</button>
-</li> --}}
-
 <div class="col-3">
     <div class="card-fluid shadow p-3">
-        <img src="{{dataValues.Image}}" width="400px" height="250px" alt="">
+        <img class="img-fluid" src="{{dataValues.Image}}" width="400px" height="250px" alt="">
         <h3 class="name">{{dataValues.Product_Name}}</h3>
         <hr />
         <ul>
@@ -21,8 +11,11 @@
             <hr>
             <li><span class="font-weight-bold">Renter</span> {{dataValues.Customer.dataValues.Name}}</li>
         </ul>
-        <button data-id={{dataValues.ProductID}} data-price={{dataValues.UnitPrice}} data-user={{dataValues.Customer.dataValues.CustomerID}}
-            data-stock={{dataValues.UnitsInStock}} data-order={{dataValues.UnitsOnOrder}} class="orderBtn btn btn-primary">ORDER</button>
 
+        <button data-id={{dataValues.ProductID}} data-price={{dataValues.UnitPrice}}
+            data-user={{dataValues.Customer.dataValues.CustomerID}} data-stock={{dataValues.UnitsInStock}}
+            data-order={{dataValues.UnitsOnOrder}} class="orderBtn btn btn-primary">ORDER</button>
+
+       
     </div>
 </div>

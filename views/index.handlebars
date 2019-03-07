@@ -234,7 +234,6 @@
 </div>
 
 <script>
-
     function initAutocomplete() {
         var input = document.getElementById("locationSearch");
         new google.maps.places.Autocomplete(input);
@@ -285,7 +284,6 @@
             "Wet Vac",
             "Wood",
         ];
-
         function initDialog() {
             clearDialog();
             for (var i = 0; i < dishNames.length; i++) {
@@ -315,7 +313,6 @@
                 .focus();
             $(this).removeClass("visible");
         });
-
         function match(str) {
             str = str.toLowerCase();
             clearDialog();
