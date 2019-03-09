@@ -210,7 +210,7 @@ $("#submitProduct").on("click", function(event) {
 
   console.log(id);
   console.log("posting product;" + postProduct);
-  debugger;
+//   debugger;
 
   $.ajax({
     method: "POST",
@@ -218,7 +218,7 @@ $("#submitProduct").on("click", function(event) {
     data: postProduct
   }).done(function(data) {
     console.log(id);
-    debugger;
+//     debugger;
     window.location.href = "/myaccount/" + id;
   });
 });
