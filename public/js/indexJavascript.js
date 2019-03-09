@@ -181,8 +181,6 @@ NOT WORKING
 
 */
 
-$("#addProductButton").on("click", function() {});
-
 /*
 
 SUBMIT PRODUCT SECTION
@@ -204,12 +202,15 @@ $("#submitProduct").on("click", function(event) {
     ProductName: productName,
     UnitPrice: unitPrice,
     UnitsInStock: unitsInStock,
+    UnitsOnOrder: 0,
+    Availability: 1,
+    FK_CategoryID: 1,
     image: imageURL
   };
 
   console.log(id);
-  console.log(postProduct);
-  debugger;
+  console.log("posting product;" + postProduct);
+//   debugger;
 
   $.ajax({
     method: "POST",
@@ -217,7 +218,7 @@ $("#submitProduct").on("click", function(event) {
     data: postProduct
   }).done(function(data) {
     console.log(id);
-    debugger;
+//     debugger;
     window.location.href = "/myaccount/" + id;
   });
 });
