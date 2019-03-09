@@ -260,6 +260,10 @@ img {
   margin-bottom: 20px;
 }
 #myAccount {
+
+
+  float: right;
+
   background-color: #53c987;
   border-color: #53c987;
 }
