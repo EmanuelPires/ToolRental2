@@ -37,6 +37,7 @@ module.exports = function(app) {
     });
   });
   app.post("/api/addorder/", function(req, res) {
+    console.log("/api/addorder/");
     console.log(req.body);
     db.Order.create({
       FK_CustomerID: req.body.FK_CustomerID,
@@ -45,7 +46,7 @@ module.exports = function(app) {
       PickUp: req.body.PickUp,
       OrderCost: req.body.OrderCost
     }).then(function(dbResponse) {
-      res.render("Index_myaccount");
+      res.render("index_myaccount");
     });
   });
 

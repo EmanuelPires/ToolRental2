@@ -335,6 +335,7 @@ Order Button Section
 */
 
 $(".orderBtn").on("click", function() {
+  event.preventDefault();
   console.log("hello");
 
   var productid = $(this).data("id");
