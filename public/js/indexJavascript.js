@@ -212,7 +212,7 @@ $("#submitProduct").on("click", function(event) {
 
   console.log(id);
   console.log("posting product;" + postProduct);
-  debugger;
+//   debugger;
 
   $.ajax({
     method: "POST",
@@ -220,7 +220,7 @@ $("#submitProduct").on("click", function(event) {
     data: postProduct
   }).done(function(data) {
     console.log(id);
-    debugger;
+//     debugger;
     window.location.href = "/myaccount/" + id;
   });
 });
@@ -257,6 +257,14 @@ $("#homeBtn").on("click", function() {
   window.location.href = "/login/" + id;
 });
 
+// $("#hBtn").on("click", function() {
+//   var id = document.getElementById("hBtn").getAttribute("data-id");
+//   // var id = $(this).data("id");
+//   console.log(id);
+
+//   window.location.href = "/index/" + id;
+// });
+
 /*
 
 USER UPDATING PROFILE
@@ -266,7 +274,7 @@ USER UPDATING PROFILE
 $("#saveBTN").on("click", function() {
   var firstName = document.getElementById("firstName").value;
   var lastName = document.getElementById("lastName").value;
-  var fullName = firstName + lastName;
+  var fullName = firstName + " " + lastName;
   var phone = document.getElementById("phone").value;
   var street = document.getElementById("street").value;
   var city = document.getElementById("city").value;
