@@ -54,6 +54,7 @@ function login(url) {
     url: url
   }).then(function(data) {
     var id = data.FK_CustomerID;
+    localStorage.setItem("userID", id);
     console.log(id);
 
     url_login = "/login/" + id;
@@ -105,6 +106,7 @@ $("#newUserSubmit").on("click", function() {
       }).then(function(data) {
         console.log(data.FK_CustomerID);
         id = data.FK_CustomerID;
+        localStorage.setItem("userID", id);
         console.log(id);
         //model hide
         url_login = "/login/" + id;
@@ -236,7 +238,7 @@ My Account Section
 */
 
 $("#myAccount").on("click", function() {
-  var id = $(this).data("id");
+  var id = localStorage.getItem("userID");
   console.log(id);
   window.location.href = "/myaccount/" + id;
 });
@@ -248,7 +250,7 @@ Home Button From Profile Page
 */
 
 $("#homeBtn").on("click", function() {
-  var id = document.getElementById("homeBtn").getAttribute("data-id");
+  var id = localStorage.getItem("userID");
   // var id = $(this).data("id");
   console.log(id);
 
@@ -279,7 +281,7 @@ $("#saveBTN").on("click", function() {
   var state = document.getElementById("state").value;
   var country = document.getElementById("country").value;
   var zipcode = document.getElementById("zipcode").value;
-  var id = $(this).data("id");
+  var id = localStorage.getItem("userID");
 
   var updatedUser =
     "First Name: " +
@@ -313,10 +315,8 @@ $("#saveBTN").on("click", function() {
     url: "/api/customer/" + id,
     data: UPDATE
   }).done(function() {
-    debugger;
-    console.log(id);
     var url = "/myaccount/" + id;
-    debugger;
+
     window.location.href = url;
 
     // $.ajax({
@@ -347,7 +347,7 @@ $(".orderBtn").on("click", function() {
   console.log("hello");
 
   var productid = $(this).data("id");
-  var customerid = $(this).data("user");
+  var customerid = localStorage.getItem("userID");
 
   var OrderCost = $(this).data("price");
   var UnitsOnOrder = parseInt($(this).data("order")) + 1;
@@ -370,7 +370,6 @@ $(".orderBtn").on("click", function() {
 
   console.log(Order);
   console.log(Product);
-  debugger;
 
   $.ajax({
     method: "POST",
@@ -378,7 +377,7 @@ $(".orderBtn").on("click", function() {
     data: Order
   }).done(function(data) {
     alert("Thank you for the order");
-    debugger;
+
     $.ajax({
       method: "PUT",
       url: "/api/product/",
